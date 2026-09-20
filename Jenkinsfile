@@ -55,7 +55,7 @@ pipeline {
                         sh "ssh -tt ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'cd ${DOCKER_APP_DIR} && docker build -t tomcat_app_image .'"
 
                         echo 'Running new container...'
-                        sh "ssh -tt ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'docker run -d --name tomcat_container -p 8080:8080 tomcat_app_image'"
+                        sh "ssh -tt ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'docker run -d --name tomcat_container -p 8090:8080 tomcat_app_image'"
                     }
                 }
             }
