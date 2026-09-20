@@ -50,13 +50,13 @@ pipeline {
                         // --- 2. Execute Docker commands on the remote machine
                         // The `ssh` command runs commands on the remote machine
                         echo 'Stopping and removing old container and image...'
-                        sh "ssh -O ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'cd ${DOCKER_APP_DIR} && docker stop tomcat_container || true && docker rm tomcat_container || true && docker rmi tomcat_app_image || true'"
+                        sh "ssh --tt ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'cd ${DOCKER_APP_DIR} && docker stop tomcat_container || true && docker rm tomcat_container || true && docker rmi tomcat_app_image || true'"
 
                         echo 'Building new Docker image...'
-                        sh "ssh -O ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'cd ${DOCKER_APP_DIR} && docker build -t tomcat_app_image .'"
+                        sh "ssh -tt ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'cd ${DOCKER_APP_DIR} && docker build -t tomcat_app_image .'"
 
                         echo 'Running new container...'
-                        sh "ssh -O ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'docker run -d --name tomcat_container -p 8080:8080 tomcat_app_image'"
+                        sh "ssh -tt ${DOCKER_HOST_USER}@${DOCKER_HOST_IP} 'docker run -d --name tomcat_container -p 8080:8080 tomcat_app_image'"
                     }
                 }
             }
