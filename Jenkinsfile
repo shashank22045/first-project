@@ -44,8 +44,8 @@ pipeline {
 
                         // --- 1. Copy necessary files to the remote machine
                         // The `scp` command copies the WAR file and Dockerfile
-                        sh "scp target/*.war ${DOCKER_HOST_USER}@${DOCKER_HOST_IP}:${DOCKER_APP_DIR}/"
-                        sh "scp Dockerfile ${DOCKER_HOST_USER}@${DOCKER_HOST_IP}:${DOCKER_APP_DIR}/"
+                        sh "scp target/*.war ${DOCKER_HOST_USER}@${DOCKER_HOST_IP}:${DOCKER_APP_DIR}"
+                        sh "scp Dockerfile ${DOCKER_HOST_USER}@${DOCKER_HOST_IP}:${DOCKER_APP_DIR}"
 
                         // --- 2. Execute Docker commands on the remote machine
                         // The `ssh` command runs commands on the remote machine
